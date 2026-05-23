@@ -114,48 +114,48 @@
 | A2-040     | PASS          |  ✅  |
 | A2-041     | PASS          |  ✅  |
 | A2-042     | FAIL (80/100) |  ⚠️  |
-| A2-043     | FAIL (0/4)    |  ❌  |
-| A2-045     | FAIL (0/6)    |  ❌  |
-| A2-046     | FAIL (0/4)    |  ❌  |
-| A2-047     | FAIL (0/4)    |  ❌  |
-| A2-048     | FAIL (0/5)    |  ❌  |
-| A2-049     | FAIL (2/4)    |  ❌  |
-| A2-050     | FAIL (2/5)    |  ❌  |
-| A2-051     | FAIL (1/5)    |  ❌  |
-| A2-053     | FAIL (2/4)    |  ❌  |
-| A2-054     | FAIL (2/4)    |  ❌  |
-| A2-055     | FAIL (2/4)    |  ❌  |
-| A2-056     | No Test Cases |  ➖  |
-| A2-058     | FAIL (2/4)    |  ❌  |
-| A2-059     | No Test Cases |  ➖  |
-| A2-060     | FAIL (2/4)    |  ❌  |
-| A2-061     | FAIL (2/4)    |  ❌  |
-| A2-062     | FAIL (3/5)    |  ❌  |
-| A3-001     | PASS          |  ✅  |
-| A3-002     | FAIL (0/3)    |  ❌  |
-| A3-003     | PASS          |  ✅  |
-| A3-004     | PASS          |  ✅  |
-| A3-005     | PASS          |  ✅  |
-| A3-006     | PASS          |  ✅  |
-| A3-007     | PASS          |  ✅  |
-| A3-008     | PASS          |  ✅  |
-| A3-009     | FAIL (0/1)    |  ❌  |
-| A3-010     | FAIL (1/2)    |  ❌  |
-| A3-011     | PASS          |  ✅  |
-| A3-012     | PASS          |  ✅  |
-| A3-013     | PASS          |  ✅  |
-| A3-014     | PASS          |  ✅  |
-| A3-015     | PASS          |  ✅  |
-| A3-016     | PASS          |  ✅  |
-| A3-017     | PASS          |  ✅  |
-| A3-018     | PASS          |  ✅  |
-| A3-019     | PASS          |  ✅  |
-| A3-020     | PASS          |  ✅  |
-| A3-021     | PASS          |  ✅  |
-| A3-022     | PASS          |  ✅  |
-| A3-023     | PASS          |  ✅  |
-| A3-024     | PASS          |  ✅  |
-| A3-025     | PASS          |  ✅  |
-| A3-026     | No Test Cases |  ➖  |
-| A3-027     | No Test Cases |  ➖  |
-| A3-028     | No Test Cases |  ➖  |
+| A2-043     | UNTESTED      |  ➖  |
+| A2-045     | UNTESTED      |  ➖  |
+| A2-046     | UNTESTED      |  ➖  |
+| A2-047     | UNTESTED      |  ➖  |
+| A2-048     | UNTESTED      |  ➖  |
+| A2-049     | UNTESTED      |  ➖  |
+| A2-050     | UNTESTED      |  ➖  |
+| A2-051     | UNTESTED      |  ➖  |
+| A2-053     | UNTESTED      |  ➖  |
+| A2-054     | UNTESTED      |  ➖  |
+| A2-055     | UNTESTED      |  ➖  |
+| A2-056     | UNTESTED      |  ➖  |
+| A2-058     | UNTESTED      |  ➖  |
+| A2-059     | UNTESTED      |  ➖  |
+| A2-060     | UNTESTED      |  ➖  |
+| A2-061     | UNTESTED      |  ➖  |
+| A2-062     | UNTESTED      |  ➖  |
+| A3-001     | UNTESTED      |  ➖  |
+| A3-002     | UNTESTED      |  ➖  |
+| A3-003     | UNTESTED      |  ➖  |
+| A3-004     | UNTESTED      |  ➖  |
+| A3-005     | UNTESTED      |  ➖  |
+| A3-006     | UNTESTED      |  ➖  |
+| A3-007     | UNTESTED      |  ➖  |
+| A3-008     | UNTESTED      |  ➖  |
+| A3-009     | UNTESTED      |  ➖  |
+| A3-010     | UNTESTED      |  ➖  |
+| A3-011     | UNTESTED      |  ➖  |
+| A3-012     | UNTESTED      |  ➖  |
+| A3-013     | UNTESTED      |  ➖  |
+| A3-014     | UNTESTED      |  ➖  |
+| A3-015     | UNTESTED      |  ➖  |
+| A3-016     | UNTESTED      |  ➖  |
+| A3-017     | UNTESTED      |  ➖  |
+| A3-018     | UNTESTED      |  ➖  |
+| A3-019     | UNTESTED      |  ➖  |
+| A3-020     | UNTESTED      |  ➖  |
+| A3-021     | UNTESTED      |  ➖  |
+| A3-022     | UNTESTED      |  ➖  |
+| A3-023     | UNTESTED      |  ➖  |
+| A3-024     | UNTESTED      |  ➖  |
+| A3-025     | UNTESTED      |  ➖  |
+| A3-026     | UNTESTED      |  ➖  |
+| A3-027     | UNTESTED      |  ➖  |
+| A3-028     | UNTESTED      |  ➖  |
