@@ -114,11 +114,11 @@
 | A2-040     | PASS          |  ✅  |
 | A2-041     | PASS          |  ✅  |
 | A2-042     | PASS (80/100) |  ⚠️  |
-| A2-043     | UNTESTED      |  ➖  |
-| A2-045     | UNTESTED      |  ➖  |
-| A2-046     | UNTESTED      |  ➖  |
-| A2-047     | UNTESTED      |  ➖  |
-| A2-048     | UNTESTED      |  ➖  |
+| A2-043     | PASS          |  ✅  |
+| A2-045     | PASS          |  ✅  |
+| A2-046     | PASS          |  ✅  |
+| A2-047     | FAIL (30/100) |  ❌  |
+| A2-048     | PASS          |  ✅  |
 | A2-049     | UNTESTED      |  ➖  |
 | A2-050     | UNTESTED      |  ➖  |
 | A2-051     | UNTESTED      |  ➖  |
