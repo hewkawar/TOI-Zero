@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <set>
+#include <map>
 
 using namespace std;
 
@@ -10,21 +10,20 @@ int main() {
     cin.tie(NULL);
 
     int n;
-    cin >> n;
+    if (!(cin >> n)) return 0;
 
-    multiset<int> stacks;
+    map<int, int> counts;
+    int max_count = 0;
     for (int i = 0; i < n; i++) {
         int x;
-        cin >> x;
-        
-        auto it = stacks.upper_bound(x);
-        if (it != stacks.end()) {
-            stacks.erase(it);
+        if (!(cin >> x)) break;
+        counts[x]++;
+        if (counts[x] > max_count) {
+            max_count = counts[x];
         }
-        stacks.insert(x);
     }
 
-    cout << stacks.size() << endl;
+    cout << max_count << endl;
 
     return 0;
 }

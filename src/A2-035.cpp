@@ -1,33 +1,51 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <string>
 
 using namespace std;
+
+void generate_permutations(int n, const vector<string>& elements, vector<string>& current, vector<bool>& used, int& total_count) {
+    if (current.size() == n) {
+        for (int i = 0; i < n; ++i) {
+            cout << current[i] << (i == n - 1 ? "" : " ");
+        }
+        cout << "\n";
+        total_count++;
+        return;
+    }
+
+    for (int i = 0; i < n; ++i) {
+        if (!used[i]) {
+            used[i] = true;
+            current.push_back(elements[i]);
+
+            generate_permutations(n, elements, current, used, total_count);
+
+            current.pop_back();
+            used[i] = false;
+        }
+    }
+}
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    vector<int> arr(3);
-    for (int i = 0; i < 3; i++) {
-        cin >> arr[i];
-        cout << "Input number " << i + 1 << " stored." << endl;
+    int n;
+    if (!(cin >> n)) return 0;
+
+    vector<string> elements(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> elements[i];
     }
 
-    int choice;
-    if (cin >> choice) {
-        if (choice == 1) {
-            cout << "Original order: " << arr[0] << " " << arr[1] << " " << arr[2] << endl;
-        } else if (choice == 2) {
-            vector<int> sorted_arr = arr;
-            sort(sorted_arr.begin(), sorted_arr.end(), greater<int>());
-            cout << "Descending order: " << sorted_arr[0] << " " << sorted_arr[1] << " " << sorted_arr[2] << endl;
-        } else if (choice == 3) {
-            vector<int> sorted_arr = arr;
-            sort(sorted_arr.begin(), sorted_arr.end());
-            cout << "Ascending order: " << sorted_arr[0] << " " << sorted_arr[1] << " " << sorted_arr[2] << endl;
-        }
-    }
+    vector<string> current;
+    vector<bool> used(n, false);
+    int total_count = 0;
+
+    generate_permutations(n, elements, current, used, total_count);
+
+    cout << total_count << "\n";
 
     return 0;
 }

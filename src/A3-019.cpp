@@ -28,11 +28,7 @@ int main() {
     for (int i = 0; i < l; ++i) {
         int a;
         cin >> a;
-        if (max_front[a] <= h[a]) {
-            cout << 0 << "\n";
-        } else {
-            cout << max_front[a] - h[a] + 1 << "\n";
-        }
+        cout << max(0, max_front[a] - h[a] + 1) << "\n";
     }
     
     return 0;

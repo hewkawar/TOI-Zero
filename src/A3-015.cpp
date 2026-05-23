@@ -13,8 +13,8 @@ int main() {
         cin >> a[i];
     }
     
-    // Sort descending
-    sort(a.rbegin(), a.rend());
+    // Sort ascending
+    sort(a.begin(), a.end());
     
     long long total_dist = 0;
     long long current_len = 0;

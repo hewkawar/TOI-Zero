@@ -52,7 +52,7 @@ int main() {
     }
 
     if (w_count % 2 != 0) {
-        amulet += to_string(w_count);
+        amulet += to_string(max_w_consecutive);
     } else {
         if (max_w_consecutive < 2) {
             amulet += "#";

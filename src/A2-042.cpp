@@ -1,47 +1,67 @@
 #include <iostream>
 #include <string>
+#include <map>
 #include <vector>
 
 using namespace std;
-
-struct Block {
-    string prev_hash;
-    string hash;
-};
-
-void check_blockchain(const vector<Block>& chain, int idx, int n) {
-    if (idx < 0) return;
-
-    if (n == 1) {
-        cout << "1X" << endl;
-        return;
-    }
-
-    if (idx == n - 1) {
-        check_blockchain(chain, idx - 1, n);
-        return;
-    }
-
-    bool valid = (chain[idx + 1].prev_hash == chain[idx].hash);
-    cout << (idx + 1) << (valid ? "P" : "X") << endl;
-
-    check_blockchain(chain, idx - 1, n);
-}
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    vector<Block> chain;
-    string prev, h;
-    while (cin >> prev >> h) {
-        chain.push_back({prev, h});
-        if (h == "0") break;
+    string cmd;
+    map<string, int> stock;
+    vector<string> outputs;
+
+    while (cin >> cmd) {
+        if (cmd == "END") {
+            break;
+        } else if (cmd == "ADD") {
+            string name;
+            int qty;
+            cin >> name >> qty;
+            stock[name] += qty;
+        } else if (cmd == "REMOVE") {
+            string name;
+            int qty;
+            cin >> name >> qty;
+            
+            if (stock.find(name) == stock.end()) {
+                outputs.push_back("Not enough stock for " + name);
+            } else {
+                if (qty > stock[name]) {
+                    outputs.push_back("Not enough stock for " + name);
+                    stock[name] = 0;
+                } else {
+                    stock[name] -= qty;
+                }
+                
+                if (stock[name] == 0) {
+                    stock.erase(name);
+                }
+            }
+        } else if (cmd == "CHECK") {
+            bool found = false;
+            for (auto const& [name, qty] : stock) {
+                if (qty < 5) {
+                    outputs.push_back(name);
+                    found = true;
+                }
+            }
+            if (!found) {
+                outputs.push_back("All stocks are sufficient");
+            }
+        } else if (cmd == "REPORT") {
+            for (auto const& [name, qty] : stock) {
+                if (qty > 0) {
+                    outputs.push_back(name + ": " + to_string(qty));
+                }
+            }
+        }
     }
 
-    int n = chain.size();
-    if (n > 0) {
-        check_blockchain(chain, n - 2, n);
+    for (const string& out : outputs) {
+        cout << out << "\n";
     }
 
     return 0;

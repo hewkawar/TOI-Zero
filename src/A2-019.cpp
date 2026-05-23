@@ -1,5 +1,7 @@
 #include <iostream>
-#include <vector>
+#include <string>
+#include <algorithm>
+#include <cctype>
 
 using namespace std;
 
@@ -7,41 +9,48 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n;
-    cin >> n;
+    string s;
+    
+    if (!(cin >> s)) return 0;
 
-    vector<int> pass_to(n + 1);
-    for (int i = 1; i <= n; i++) {
-        cin >> pass_to[i];
-    }
-
-    vector<int> held(n + 1);
-    for (int i = 1; i <= n; i++) {
-        held[i] = i;
-    }
-
-    vector<bool> received_original(n + 1, false);
-    int received_count = 0;
-    int rounds = 0;
-
-    while (received_count < n) {
-        rounds++;
-        vector<int> next_held(n + 1);
-        
-        for (int i = 1; i <= n; i++) {
-            next_held[pass_to[i]] = held[i];
-        }
-        
-        for (int i = 1; i <= n; i++) {
-            held[i] = next_held[i];
-            if (held[i] == i && !received_original[i]) {
-                received_original[i] = true;
-                received_count++;
+    int n = s.length();
+    int max_u_count = 0;
+    int first_b_idx = -1;
+    
+    for (int i = 0; i < n; ++i) {
+        if (tolower(s[i]) == 'b') {
+            
+            if (first_b_idx == -1) {
+                first_b_idx = i;
             }
+            
+            int u_count = 0;
+            int j = i + 1;
+            while (j < n && tolower(s[j]) == 'u') {
+                u_count++;
+                j++;
+            }
+            
+            max_u_count = max(max_u_count, u_count);
         }
     }
-
-    cout << rounds << endl;
+    
+    if (max_u_count >= 2) {
+        cout << "Yes " << max_u_count << "\n";
+    } else if (first_b_idx != -1) {
+        string result = s;
+        for (int i = first_b_idx + 1; i < n; ++i) {
+            result[i] = 'U';
+        }
+        cout << result << "\n";
+        
+    } else {
+        string pattern = "BUU";
+        for (int i = 0; i < n; ++i) {
+            cout << pattern[i % 3];
+        }
+        cout << "\n";
+    }
 
     return 0;
 }

@@ -1,6 +1,5 @@
 #include <iostream>
-#include <string>
-#include <deque>
+#include <algorithm>
 
 using namespace std;
 
@@ -8,48 +7,40 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int q;
-    cin >> q;
+    int n;
+    if (!(cin >> n)) return 0;
 
-    deque<string> normal_queue;
-    deque<string> emergency_queue;
+    int fire_total = 0;
+    int water_total = 0;
+    int earth_total = 0;
 
-    for (int i = 0; i < q; i++) {
-        string cmd;
-        cin >> cmd;
+    for (int i = 0; i < n; ++i) {
+        int f1, w1, e1, f2, w2, e2;
+        cin >> f1 >> w1 >> e1 >> f2 >> w2 >> e2;
 
-        if (cmd == "ARRIVE") {
-            string name, type;
-            cin >> name >> type;
-            if (type == "normal") {
-                normal_queue.push_back(name);
-            } else if (type == "emergency") {
-                emergency_queue.push_back(name);
-            }
-        } else if (cmd == "TREAT") {
-            if (!emergency_queue.empty()) {
-                emergency_queue.pop_front();
-            } else if (!normal_queue.empty()) {
-                normal_queue.pop_front();
-            }
-        } else if (cmd == "SHOW") {
-            if (emergency_queue.empty() && normal_queue.empty()) {
-                cout << "EMPTY" << endl;
-            } else {
-                bool first = true;
-                for (const string& name : emergency_queue) {
-                    if (!first) cout << " ";
-                    cout << name;
-                    first = false;
-                }
-                for (const string& name : normal_queue) {
-                    if (!first) cout << " ";
-                    cout << name;
-                    first = false;
-                }
-                cout << endl;
-            }
+        int sum1 = f1 + w1 + e1;
+        int sum2 = f2 + w2 + e2;
+
+        if (sum1 >= sum2) {
+            fire_total += f1;
+            water_total += w1;
+            earth_total += e1;
+        } else {
+            fire_total += f2;
+            water_total += w2;
+            earth_total += e2;
         }
+    }
+
+    int total_score = fire_total + water_total + earth_total;
+
+    cout << total_score << "\n";
+    cout << fire_total << " " << water_total << " " << earth_total << "\n";
+    
+    if (fire_total > water_total + earth_total) {
+        cout << "YES\n";
+    } else {
+        cout << "NO\n";
     }
 
     return 0;

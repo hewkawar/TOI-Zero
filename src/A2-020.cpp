@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <string>
 #include <algorithm>
 
 using namespace std;
@@ -10,43 +9,32 @@ int main() {
     cin.tie(NULL);
 
     int n;
-    cin >> n;
+    if (!(cin >> n)) return 0;
 
-    int r, c;
-    cin >> r >> c;
-
-    int k;
-    cin >> k;
-
-    vector<vector<int>> grid(n, vector<int>(c, 0));
-    for (int i = 0; i < k; i++) {
-        int pr, pc;
-        cin >> pr >> pc;
-        grid[pr][pc]++;
+    vector<int> a(n + 1);
+    for (int i = 1; i <= n; ++i) {
+        cin >> a[i];
     }
 
-    int max_catch = 0;
+    vector<bool> visited(n + 1, false);
+    int max_cycle = 0;
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < c; j++) {
-            if (grid[i][j] == 0) {
-                int current_catch = 0;
-                for (int dr = -1; dr <= 1; dr++) {
-                    for (int dc = -1; dc <= 1; dc++) {
-                        if (dr == 0 && dc == 0) continue;
-                        int nr = i + dr;
-                        int nc = j + dc;
-                        if (nr >= 0 && nr < n && nc >= 0 && nc < c) {
-                            current_catch += grid[nr][nc];
-                        }
-                    }
-                }
-                max_catch = max(max_catch, current_catch);
+    for (int i = 1; i <= n; ++i) {
+        if (!visited[i]) {
+            int length = 0;
+            int curr = i;
+
+            while (!visited[curr]) {
+                visited[curr] = true;
+                curr = a[curr];
+                length++;
             }
+
+            max_cycle = max(max_cycle, length);
         }
     }
 
-    cout << max_catch << endl;
+    cout << max_cycle << "\n";
 
     return 0;
 }

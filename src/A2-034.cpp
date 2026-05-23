@@ -1,36 +1,35 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
+
+bool isPrime(int num) {
+    if (num <= 1) return false;
+    for (int i = 2; i * i <= num; ++i) {
+        if (num % i == 0) return false;
+    }
+    return true;
+}
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
     int n;
-    cin >> n;
+    if (!(cin >> n)) return 0;
 
-    vector<vector<int>> grid(n, vector<int>(n));
-    int current = 1;
-
-    for (int j = 0; j < n; j++) {
-        if (j % 2 == 0) {
-            for (int i = 0; i < n; i++) {
-                grid[i][j] = current++;
-            }
-        } else {
-            for (int i = n - 1; i >= 0; i--) {
-                grid[i][j] = current++;
+    if (isPrime(n)) {
+        cout << "Yes\n";
+        bool first = true;
+        for (int i = 2; i <= n; ++i) {
+            if (isPrime(i)) {
+                if (!first) cout << " ";
+                cout << i;
+                first = false;
             }
         }
-    }
-
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            cout << grid[i][j];
-            if (j < n - 1) cout << " ";
-        }
-        cout << endl;
+        cout << "\n";
+    } else {
+        cout << "No\n";
     }
 
     return 0;

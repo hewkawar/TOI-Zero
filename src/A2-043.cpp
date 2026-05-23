@@ -1,52 +1,52 @@
 #include <iostream>
-#include <string>
 #include <vector>
+#include <string>
 
 using namespace std;
-
-int count_vowels(const string& s) {
-    int count = 0;
-    for (char c : s) {
-        char lc = tolower(c);
-        if (lc == 'a' || lc == 'e' || lc == 'i' || lc == 'o' || lc == 'u') {
-            count++;
-        }
-    }
-    return count;
-}
-
-int max_consecutive_vowels(const string& s) {
-    int max_consec = 0;
-    int current_consec = 0;
-    for (char c : s) {
-        char lc = tolower(c);
-        if (lc == 'a' || lc == 'e' || lc == 'i' || lc == 'o' || lc == 'u') {
-            current_consec++;
-            max_consec = max(max_consec, current_consec);
-        } else {
-            current_consec = 0;
-        }
-    }
-    return max_consec;
-}
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int t;
-    cin >> t;
-    cin.ignore();
+    int n;
+    if (!(cin >> n)) return 0;
 
-    for (int i = 1; i <= t; i++) {
-        string line;
-        getline(cin, line);
-        
-        int vowels = count_vowels(line);
-        int max_consec = max_consecutive_vowels(line);
-        
-        cout << "Line " << i << ": vowels = " << vowels << ", max_consecutive = " << max_consec << endl;
+    vector<int> cave(n);
+    int player_pos = -1;
+
+    for (int i = 0; i < n; ++i) {
+        cin >> cave[i];
+        if (cave[i] == 1) {
+            player_pos = i;
+        }
     }
+
+    string s;
+    cin >> s;
+
+    for (char cmd : s) {
+        int next_pos = player_pos;
+        if (cmd == 'L') {
+            next_pos--;
+        } else if (cmd == 'R') {
+            next_pos++;
+        }
+
+        if (next_pos >= 0 && next_pos < n) {
+            cave[player_pos] = 0;
+            if (cave[next_pos] == 2) {
+                cave[next_pos] = 1;
+                break;
+            }
+            cave[next_pos] = 1;
+            player_pos = next_pos;
+        }
+    }
+
+    for (int i = 0; i < n; ++i) {
+        cout << cave[i] << (i == n - 1 ? "" : " ");
+    }
+    cout << "\n";
 
     return 0;
 }

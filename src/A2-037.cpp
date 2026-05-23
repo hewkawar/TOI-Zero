@@ -1,6 +1,6 @@
 #include <iostream>
-#include <vector>
 #include <string>
+#include <deque>
 
 using namespace std;
 
@@ -8,34 +8,48 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int num, query;
-    cin >> num >> query;
+    int q;
+    if (!(cin >> q)) return 0;
 
-    vector<int> active_stores(1441, 0);
+    deque<string> em_q;
+    deque<string> norm_q;
 
-    for (int i = 0; i < num; i++) {
-        int start, stop;
-        cin >> start >> stop;
-
-        active_stores[start]++;
-        if (stop + 1 <= 1440) {
-            active_stores[stop + 1]--;
+    for (int i = 0; i < q; ++i) {
+        string cmd;
+        cin >> cmd;
+        if (cmd == "ARRIVE") {
+            string name, type;
+            cin >> name >> type;
+            if (type == "emergency") {
+                em_q.push_back(name);
+            } else {
+                norm_q.push_back(name);
+            }
+        } else if (cmd == "TREAT") {
+            if (!em_q.empty()) {
+                em_q.pop_front();
+            } else if (!norm_q.empty()) {
+                norm_q.pop_front();
+            }
+        } else if (cmd == "SHOW") {
+            if (em_q.empty() && norm_q.empty()) {
+                cout << "EMPTY\n";
+            } else {
+                bool first = true;
+                for (const string& name : em_q) {
+                    if (!first) cout << " ";
+                    cout << name;
+                    first = false;
+                }
+                for (const string& name : norm_q) {
+                    if (!first) cout << " ";
+                    cout << name;
+                    first = false;
+                }
+                cout << "\n";
+            }
         }
     }
-
-    int current_active = 0;
-    vector<int> result(1441);
-    for (int i = 0; i <= 1440; i++) {
-        current_active += active_stores[i];
-        result[i] = current_active;
-    }
-
-    for (int i = 0; i < query; i++) {
-        int q;
-        cin >> q;
-        cout << result[q] << (i == query - 1 ? "" : " ");
-    }
-    cout << endl;
 
     return 0;
 }

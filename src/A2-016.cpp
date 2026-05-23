@@ -1,49 +1,47 @@
 #include <iostream>
-#include <vector>
 #include <string>
-#include <sstream>
 
 using namespace std;
 
 int main() {
+    
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    string line1, line2;
-    getline(cin, line1);
-    getline(cin, line2);
+    char win_char, my_char;
+    string win_num, my_num;
 
-    char type = line1[0];
-    char size = line1[2];
-    
-    char topping = line2[0];
-    int topping_amount = 0;
-    
-    if (topping != 'N') {
-        stringstream ss(line2.substr(2));
-        ss >> topping_amount;
+    if (!(cin >> win_char >> win_num)) return 0;
+
+    if (!(cin >> my_char >> my_num)) return 0;
+
+    int prize = 0;
+
+    bool char_match = (win_char == my_char);
+    bool num_match = (win_num == my_num);
+
+    bool last3_match = (win_num.substr(2, 3) == my_num.substr(2, 3));
+    bool last2_match = (win_num.substr(3, 2) == my_num.substr(3, 2));
+
+    if (num_match && char_match) {
+        prize = 1000000;
+    } else if (num_match && !char_match) {
+        prize = 100000;
+    } else if (last3_match && char_match) {
+        prize = 2000;
+    } else if (last2_match && char_match) {
+        prize = 1000;
+    } else if (last3_match && !char_match) {
+        prize = 200;
+    } else if (last2_match && !char_match) {
+        prize = 100;
+    } else if (char_match) {
+        prize = 20;
+    } else {
+        prize = 0;
     }
 
-    int price = 0;
-    
-    if (type == 'S') {
-        if (size == 'R') price = 60;
-        else if (size == 'T') price = 80;
-    } else if (type == 'M') {
-        if (size == 'R') price = 80;
-        else if (size == 'T') price = 100;
-    } else if (type == 'L') {
-        if (size == 'R') price = 100;
-        else if (size == 'T') price = 120;
-    }
-
-    if (topping == 'P') {
-        price += topping_amount * 15;
-    } else if (topping == 'E') {
-        price += topping_amount * 10;
-    }
-
-    cout << price << endl;
+    cout << prize << "\n";
 
     return 0;
 }

@@ -7,54 +7,30 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int len;
-    cin >> len;
-
-    string s1 = "", s2 = "";
-    for (int i = 0; i < len; i++) {
-        string t;
-        cin >> t;
-        s1 += t;
-    }
-    for (int i = 0; i < len; i++) {
-        string t;
-        cin >> t;
-        s2 += t;
-    }
-
     int n;
-    cin >> n;
+    if (!(cin >> n)) return 0;
 
-    for (int i = 0; i < n; i++) {
-        int strand, pos;
-        string new_gene;
-        cin >> strand >> pos >> new_gene;
-        if (strand == 1) {
-            s1[pos] = new_gene[0];
-        } else {
-            s2[pos] = new_gene[0];
+    int over_count = 0;
+    long long max_weight = 0;
+    string max_name = "";
+
+    for (int i = 0; i < n; ++i) {
+        string name;
+        long long weight;
+        cin >> name >> weight;
+
+        if (weight > 15) {
+            over_count++;
+        }
+
+        if (i == 0 || weight > max_weight) {
+            max_weight = weight;
+            max_name = name;
         }
     }
 
-    for (int i = 0; i < len; i++) {
-        cout << s1[i] << (i == len - 1 ? "" : " ");
-    }
-    cout << endl;
-    for (int i = 0; i < len; i++) {
-        cout << s2[i] << (i == len - 1 ? "" : " ");
-    }
-    cout << endl;
-
-    int mismatch = 0;
-    for (int i = 0; i < len; i++) {
-        if ((s1[i] == 'A' && s2[i] == 'T') || (s1[i] == 'T' && s2[i] == 'A') || (s1[i] == 'C' && s2[i] == 'G') || (s1[i] == 'G' && s2[i] == 'C')) {
-            // Match
-        } else {
-            mismatch++;
-        }
-    }
-
-    cout << mismatch << endl;
+    cout << over_count << "\n";
+    cout << max_name << " " << max_weight << "\n";
 
     return 0;
 }
