@@ -1,62 +1,41 @@
 #include <iostream>
-#include <vector>
 #include <string>
-#include <iomanip>
+#include <algorithm>
 
 using namespace std;
 
-struct Student {
-    string name;
-    int score;
-};
+bool is_vowel(char c) {
+    char lc = tolower(c);
+    return (lc == 'a' || lc == 'e' || lc == 'i' || lc == 'o' || lc == 'u');
+}
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n;
-    cin >> n;
+    int t;
+    if (!(cin >> t)) return 0;
+    cin.ignore(); 
 
-    if (n == 0) {
-        cout << "Student:" << endl;
-        cout << "Highest score: 0" << endl;
-        cout << "Lowest score: 0" << endl;
-        cout << "Average score: 0.0" << endl;
-        cout << "Students who scored above average:" << endl;
-        return 0;
-    }
+    for (int i = 1; i <= t; ++i) {
+        string line;
+        getline(cin, line);
 
-    vector<Student> students(n);
-    int total_score = 0;
-    int highest = -1;
-    int lowest = 101;
+        int total_vowels = 0;
+        int max_consec = 0;
+        int current_consec = 0;
 
-    for (int i = 0; i < n; i++) {
-        cin >> students[i].score;
-        students[i].name = "Student" + to_string(i + 1);
-        
-        total_score += students[i].score;
-        if (students[i].score > highest) highest = students[i].score;
-        if (students[i].score < lowest) lowest = students[i].score;
-    }
-
-    cout << "Student:";
-    for (int i = 0; i < n; i++) {
-        cout << " " << students[i].name;
-    }
-    cout << endl;
-
-    cout << "Highest score: " << highest << endl;
-    cout << "Lowest score: " << lowest << endl;
-
-    double avg = (double)total_score / n;
-    cout << "Average score: " << fixed << setprecision(1) << avg << endl;
-
-    cout << "Students who scored above average:" << endl;
-    for (int i = 0; i < n; i++) {
-        if (students[i].score > avg) {
-            cout << "Student " << (i + 1) << endl;
+        for (char c : line) {
+            if (is_vowel(c)) {
+                total_vowels++;
+                current_consec++;
+                max_consec = max(max_consec, current_consec);
+            } else {
+                current_consec = 0;
+            }
         }
+
+        cout << "Line " << i << ": vowels = " << total_vowels << ", max_consecutive = " << max_consec << "\n";
     }
 
     return 0;

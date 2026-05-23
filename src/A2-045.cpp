@@ -1,42 +1,38 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
-struct Block {
-    int id;
-    int prev_hash;
-    int hash;
-};
-
-void check_blockchain(int current_id, int next_prev_hash, int total_blocks) {
+int check_blockchain(int current_id, bool &only_one) {
     int prev_hash, hash;
-    if (!(cin >> prev_hash >> hash)) return;
+    if (!(cin >> prev_hash >> hash)) return -1;
 
     if (hash == 0) {
-        return;
+        if (current_id == 1) {
+            only_one = true;
+        }
+        return prev_hash;
     }
 
-    check_blockchain(current_id + 1, prev_hash, total_blocks);
+    int next_prev_hash = check_blockchain(current_id + 1, only_one);
 
     if (next_prev_hash == hash) {
         cout << current_id << "P\n";
     } else {
         cout << current_id << "X\n";
     }
+
+    return prev_hash;
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int prev_hash, hash;
-    if (!(cin >> prev_hash >> hash)) return 0;
-
-    if (hash == 0) {
+    bool only_one = false;
+    check_blockchain(1, only_one);
+    
+    if (only_one) {
         cout << "1X\n";
-    } else {
-        check_blockchain(1, prev_hash, 1);
     }
 
     return 0;

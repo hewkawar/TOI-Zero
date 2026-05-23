@@ -1,7 +1,7 @@
 #include <iostream>
-#include <string>
-#include <algorithm>
 #include <vector>
+#include <algorithm>
+#include <iomanip>
 
 using namespace std;
 
@@ -9,50 +9,47 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    long long n;
-    cin >> n;
+    int n;
+    if (!(cin >> n)) return 0;
+
+    cout << "Student:";
+    for (int i = 1; i <= n; ++i) {
+        cout << " Student" << i;
+    }
+    cout << "\n";
 
     if (n == 0) {
-        cout << "0" << endl;
-        cout << "0" << endl;
-        cout << "0" << endl;
+        cout << "Highest score: 0\n";
+        cout << "Lowest score: 0\n";
+        cout << "Average score: 0.0\n";
+        cout << "Students who scored above average:\n";
         return 0;
     }
 
-    // Binary
-    long long temp = n;
-    string bin = "";
-    while (temp > 0) {
-        bin += (temp % 2 == 0 ? "0" : "1");
-        temp /= 2;
-    }
-    reverse(bin.begin(), bin.end());
-    cout << bin << endl;
+    vector<int> scores(n);
+    int highest = -1;
+    int lowest = 101;
+    long long sum = 0;
 
-    // Octal
-    temp = n;
-    string oct = "";
-    while (temp > 0) {
-        oct += to_string(temp % 8);
-        temp /= 8;
+    for (int i = 0; i < n; ++i) {
+        cin >> scores[i];
+        if (scores[i] > highest) highest = scores[i];
+        if (scores[i] < lowest) lowest = scores[i];
+        sum += scores[i];
     }
-    reverse(oct.begin(), oct.end());
-    cout << oct << endl;
 
-    // Hexadecimal
-    temp = n;
-    string hex = "";
-    while (temp > 0) {
-        int rem = temp % 16;
-        if (rem < 10) {
-            hex += to_string(rem);
-        } else {
-            hex += (char)('A' + rem - 10);
+    double average = (double)sum / n;
+
+    cout << "Highest score: " << highest << "\n";
+    cout << "Lowest score: " << lowest << "\n";
+    cout << "Average score: " << fixed << setprecision(1) << average << "\n";
+    cout << "Students who scored above average:\n";
+
+    for (int i = 0; i < n; ++i) {
+        if ((double)scores[i] > average) {
+            cout << "Student " << (i + 1) << "\n";
         }
-        temp /= 16;
     }
-    reverse(hex.begin(), hex.end());
-    cout << hex << endl;
 
     return 0;
 }
