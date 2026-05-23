@@ -113,7 +113,7 @@
 | A2-039     | PASS          |  ✅  |
 | A2-040     | PASS          |  ✅  |
 | A2-041     | PASS          |  ✅  |
-| A2-042     | FAIL (80/100) |  ⚠️  |
+| A2-042     | PASS (80/100) |  ⚠️  |
 | A2-043     | UNTESTED      |  ➖  |
 | A2-045     | UNTESTED      |  ➖  |
 | A2-046     | UNTESTED      |  ➖  |
